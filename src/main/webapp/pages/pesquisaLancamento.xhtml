@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Pesq.Lançamentos</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/template/menu.xhtml" />
+
+	<div class="card" style="margin-top: 15px;">
+		<h:form id="formPesquisaLancamentos">
+			<p:fieldset legend="Pesquisa">
+				<div class="card">
+					<div class="p-grid  ui-fluid">
+						<div class="p-col-12 p-md-4">
+							<p:selectOneMenu style="width:10%;"
+								value="#{beanLancamentos.parametro}">
+								<f:selectItem itemLabel="" noSelectionOption="true"
+									itemDisabled="true" />
+								<f:selectItem itemLabel="Geral" itemValue="Geral" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+
+					<div class="p-grid  ui-fluid">
+						<div class="p-col-12 p-md-4">
+							<p:commandButton value="Pesquisar" style="width:10%;"
+								action="#{beanLancamentos.carregaPesquisa}" update="@all" />
+						</div>
+					</div>
+				</div>
+			</p:fieldset>
+		</h:form>
+	</div>
+
+	<div class="card" style="margin-top: 15px;">
+		<h:form id="formResultLanca">
+
+			<p:fieldset legend="Resultado">
+
+				<p:dataTable id="listaResultado" var="lanca"
+					value="#{beanLancamentos.lista}" rowKey="#{lanca.id}"
+					selection="#{beanLancamentos.lancamento}" selectionMode="single">
+
+					<f:facet name="header">
+		                Clique com Botão Direito para Ver Opções
+		            </f:facet>
+
+					<p:column headerText="Id">
+						<h:outputText value="#{lanca.id}" />
+					</p:column>
+					
+					<p:column headerText="Usuario Cadastro">
+						<h:outputText value="#{lanca.usuario.nomeCompleto}" />
+					</p:column>
+					
+					<p:column headerText="Data de Cadastro">
+						<h:outputText value="#{lanca.dataCadastro}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Servico">
+						<h:outputText value="#{lanca.servico.nome}" />
+					</p:column>
+					
+					<p:column headerText="Valor">
+						<h:outputText value="R$ #{lanca.servico.valor}" />
+					</p:column>
+					
+					
+
+					
+
+
+				</p:dataTable>
+
+				<p:contextMenu for="listaResultado">
+					<p:menuitem value="Ver" icon="pi pi-search" update="empresaDetail"
+						oncomplete="PF('empresaDialog').show()" />
+					<p:menuitem value="Deletar" icon="pi pi-times"
+						 update="listaResultado" />
+				</p:contextMenu>
+
+
+
+			</p:fieldset>
+
+		</h:form>
+
+		<p:dialog header="Editar" widgetVar="empresaDialog" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false">
+
+			<p:outputPanel id="empresaDetail" style="text-align:center;">
+
+				<h:form>
+					<!-- IMPLEMENTAR EDIÇÃO DE USUÁRIO POSTERIORMENTE -->
+				</h:form>
+
+			</p:outputPanel>
+
+		</p:dialog>
+
+	</div>
+
+</h:body>
+</html>

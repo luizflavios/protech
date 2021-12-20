@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<div class="card">
+	<h:form>
+
+
+		<p:menubar>
+			<p:submenu label="Cadastro" icon="pi pi-fw pi-pencil">
+				<p:menuitem value="Usuarios" icon="pi pi-fw pi-user" url="#{request.contextPath}/pages/cadUsuario.jsf"/>
+				<p:menuitem value="Empresas" icon="pi pi-fw pi-slack" url="#{request.contextPath}/pages/cadEmpresa.jsf"/>
+				<p:menuitem value="Serviços" icon="pi pi-fw pi-wallet" url="#{request.contextPath}/pages/cadServicos.jsf"/>
+				<p:menuitem value="Contratos" icon="pi pi-fw pi-book" url="#{request.contextPath}/pages/cadContratos.jsf" disabled="true"/>
+			</p:submenu>
+			
+			<p:submenu label="Lançamentos" icon="pi pi-fw pi-file">
+				<p:submenu label="Novo" icon="pi pi-fw pi-plus">
+					<p:menuitem value="Lancamento" icon="pi pi-fw pi-file" url="#{request.contextPath}/pages/cadLancamentos.jsf"/>					
+				</p:submenu>
+				<p:menuitem value="Delete" icon="pi pi-fw pi-trash" />
+				<p:divider />
+				<p:menuitem value="Export" icon="pi pi-fw pi-external-link" />
+			</p:submenu>
+
+
+			<p:divider layout="vertical" />
+
+			<p:menuitem value="Home" icon="pi pi-fw pi-home" url="#{request.contextPath}/pages/home.jsf"/>
+
+        	<f:facet name="options">
+                <p:commandButton action="#{beanUsuario.deslogar}" value="Sair" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
+            </f:facet>
+
+		</p:menubar>
+	</h:form>
+</div>
+
+</html>

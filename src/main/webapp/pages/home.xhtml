@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Home</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/template/menu.xhtml" />
+	
+	<div class="card">
+    <h:form>
+        <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+
+        <p:dashboard id="board"  model="#{beanHome.model}" style="margin-top:0px; ">
+            <p:ajax event="reorder" listener="#{beanHome.handleReorder}" update="msgs"/> 
+            
+            <p:panel id="qntd" header="Qntd de Trabalhos Mensal">
+                <strong><h:outputText  value=" #{beanHome.qntd} "/></strong>
+            </p:panel>      
+            
+            <p:panel id="qntdDespesas" header="Qntd de Despesas Mensal">
+                <strong><h:outputText  value=" #{beanHome.qntdDesp} "/></strong>
+            </p:panel>        
+            
+            <p:panel id="custo" header="Custo Total Mensal (R$)">
+                <strong><h:outputText  value="R$ #{beanHome.custo} "/></strong>
+            </p:panel>
+
+            <p:panel id="saldo" header="Rendimento Bruto Mensal (R$)">
+                <strong><h:outputText value="R$ #{beanHome.saldo}"/></strong>
+            </p:panel>
+            
+            <p:panel id="liquido" header="Rendimento Liquido Mensal">
+                <strong><h:outputText  value="R$ #{beanHome.liquido} "/></strong>
+            </p:panel>
+
+           
+        </p:dashboard>
+        
+        
+
+        <div style="clear:both"/>
+    </h:form>
+</div>
+
+<div style="margin-top:25%; margin-left: 1%; color:red;">
+<strong><h:outputLabel value="Bem vindo, seu nome" /></strong>
+</div>
+
+
+
+</h:body>
+</html>

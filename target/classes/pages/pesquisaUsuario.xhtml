@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Pesq.Usuario</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/template/menu.xhtml" />
+
+	<div class="card" style="margin-top: 15px;">
+		<h:form id="formPesquisaUser">
+			<p:fieldset legend="Pesquisa">
+				<div class="card">
+					<div class="p-grid  ui-fluid">
+						<div class="p-col-12 p-md-4">
+							<p:messages id="message" showDetail="true" closable="true">
+								<p:autoUpdate />
+							</p:messages>
+
+							<p:outputLabel for="selecao" value="Busca por Texto" />
+
+						</div>
+					</div>
+
+					<div class="p-grid  ui-fluid">
+
+						<div class="p-col-12 p-md-4">
+
+							<p:inputText style="width:21%; margin-top:10px;"
+								value="#{beanUsuario.parametro}" id="selecao" widgetVar="test" />
+
+
+						</div>
+					</div>
+
+					<div class="p-grid  ui-fluid">
+						<div class="p-col-12 p-md-4" id="divInserir"
+							style="margin-top: 10px;">
+							<p:outputLabel for="basic" value="Busca por Data " />
+						</div>
+					</div>
+
+					<div class="p-grid  ui-fluid">
+						<div class="p-col-12 p-md-4" id="divInserir"
+							style="margin-top: 10px;">
+
+							<p:datePicker showWeek="false" showTime="false" id="basic"
+								style="width:10%; margin-left:5px;"
+								value="#{beanUsuario.dataInicial}" />
+							<p:datePicker id="dada" style="width:10%; margin-left:5px;"
+								value="#{beanUsuario.dataFinal}" />
+						</div>
+					</div>
+
+					<div class="p-grid  ui-fluid">
+						<div class="p-col-12 p-md-4">
+							<p:commandButton value="Pesquisar"
+								style="width:10%; margin-top:10px; margin-left:0%;"
+								action="#{beanUsuario.pesquisaParametrizada}" update="@all" />
+						</div>
+					</div>
+				</div>
+			</p:fieldset>
+		</h:form>
+	</div>
+
+	<div class="card" style="margin-top: 15px;">
+		<h:form id="formResultUser">
+
+			<p:fieldset legend="Resultado">
+
+				<p:dataTable id="listaResultado" var="user"
+					value="#{beanUsuario.lista}" rowKey="#{user.id}"
+					selection="#{beanUsuario.usuario}" selectionMode="single">
+
+					<f:facet name="header">
+		                Clique com Botão Direito para Ver Opções
+		            </f:facet>
+
+					<p:column headerText="Id">
+						<h:outputText value="#{user.id}" />
+					</p:column>
+
+					<p:column headerText="Nome Completo">
+						<h:outputText value="#{user.nomeCompleto}" />
+					</p:column>
+
+					<p:column headerText="Perfil">
+						<h:outputText value="#{user.perfil}" />
+					</p:column>
+
+					<p:column headerText="CPF">
+						<h:outputText value="#{user.cpf}">
+							<f:convertNumber pattern="999.999.999-99" />
+						</h:outputText>
+					</p:column>
+
+
+
+				</p:dataTable>
+
+				<p:contextMenu for="listaResultado">
+					<p:menuitem value="Ver" icon="pi pi-search" action="#{beanUsuario.editar}" update="@all" />
+					<p:menuitem value="Deletar" icon="pi pi-times"
+						action="#{beanUsuario.deletar}" update="listaResultado" />
+				</p:contextMenu>
+
+
+
+			</p:fieldset>
+
+		</h:form>
+
+		
+	</div>
+
+	<script>
+		
+	</script>
+
+
+</h:body>
+</html>

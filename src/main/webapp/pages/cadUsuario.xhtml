@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Cad.Usuario</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/template/menu.xhtml" />
+	
+	<div class="card" style="margin-top:15px;">
+
+        <p:fieldset legend="Cad.Usuário">
+			<h:form id="cadUsuarioForm">
+				<div class="card">
+				
+					<p:messages id="message" showDetail="true" closable="true" >
+						<p:autoUpdate/>
+					</p:messages>
+					
+					<h5>Dados da Pessoa</h5>
+					<div class="p-grid  ui-fluid">
+					
+						<div class="p-col-12 p-md-4" >
+							<div class="ui-inputgroup">
+							
+								<div class="ui-inputgroup-addon">
+									<i class="pi pi-user"></i>
+								</div>
+								<p:inputText placeholder="Usuário" style="width:20%;" value="#{beanUsuario.usuario.usuario}"/>
+								
+								<div class="ui-inputgroup-addon" style="">
+									<i class="pi pi-lock"></i>
+								</div>
+								<p:inputText placeholder="Senha" type="password" style="width:19.5%;" value="#{beanUsuario.usuario.senha}"/>
+								
+							</div>
+						</div>					
+					
+						<div class="p-col-12 p-md-4" style="margin-top:5px;">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="pi pi-user"></i>
+								</div>
+								<p:inputText placeholder="Nome Completo" style="width:42%;" value="#{beanUsuario.usuario.nomeCompleto}"/>
+							</div>
+						</div>
+	
+						<div class="p-col-12 p-md-4" style="margin-top:5px;">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">@</div>
+								<p:inputText placeholder="Email" type="email" style="width:42%;" value="#{beanUsuario.usuario.email}"/>
+								
+							</div>
+						</div>
+						
+						<div class="p-col-12 p-md-4" style="margin-top:5px;">
+							<div class="ui-inputgroup">
+							
+								<div class="ui-inputgroup-addon">S</div>
+								<p:selectOneMenu style="width:15%;" value="#{beanUsuario.usuario.sexo}">
+								
+									 <f:selectItem itemLabel="Selecione o Sexo" noSelectionOption="true"/>
+					                 <f:selectItem itemLabel="Feminino" itemValue="Feminino"/>
+					                 <f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+								
+								</p:selectOneMenu>						
+							
+								<div class="ui-inputgroup-addon">P</div>
+								<p:selectOneMenu  style="width:8%;" value="#{beanUsuario.usuario.perfil}">
+								
+									 <f:selectItem itemLabel="Perfil"  noSelectionOption="true"/>
+					                 <f:selectItem itemLabel="Administrador" itemValue="Administrador"/>
+					                 <f:selectItem itemLabel="Básico" itemValue="Básico"/>
+								
+								</p:selectOneMenu>
+								
+								<div class="ui-inputgroup-addon">*</div>
+								<p:inputMask id="cpf" placeholder="CPF" mask="999.999.999-99" style="width:14%;" value="#{beanUsuario.usuario.cpf}"/>							
+								
+							</div>
+						</div>						
+	
+					</div>
+					
+					<h5>Dados do Endereco</h5>
+					<div class="p-grid  ui-fluid">
+					
+						<div class="p-col-12 p-md-4" >
+							<div class="ui-inputgroup">
+							
+								<div class="ui-inputgroup-addon">
+									<i class="pi pi-map-marker"></i>
+								</div>
+								<p:inputMask mask="99.999-999" placeholder="CEP" id="cep" style="width:20%;" value="#{beanUsuario.endereco.cep}">
+									<f:ajax event="blur" execute="@this" listener="#{beanUsuario.pesquisaCep}" 
+					 				render="logradouro bairro cidade uf"/> 
+								</p:inputMask>
+								
+								<div class="ui-inputgroup-addon" style="">
+									<i class="pi pi-flag"></i>
+								</div>
+								<p:inputText placeholder="Nº" id="numeroResidecial" style="width:6%;" value="#{beanUsuario.endereco.numero}"/>
+								
+								<div class="ui-inputgroup-addon" style="">C</div>
+								<p:inputText placeholder="Complemento" id="complemento" style="width:11%;" value="#{beanUsuario.endereco.complemento}"/>
+								
+							</div>
+						</div>					
+					
+						<div class="p-col-12 p-md-4" style="margin-top:5px;">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="pi pi-directions"></i>
+								</div>
+								<p:inputText placeholder="Logradouro" id="logradouro" style="width:42%;" value="#{beanUsuario.endereco.logradouro}"/>
+							</div>
+						</div>
+	
+						<div class="p-col-12 p-md-4" style="margin-top:5px;">
+							<div class="ui-inputgroup">
+							
+								<div class="ui-inputgroup-addon">
+									<i class="pi pi-map-marker"></i>
+								</div>
+								<p:inputText placeholder="Bairro" id="bairro" style="width:20%;" value="#{beanUsuario.endereco.bairro}"/>
+								
+								<div class="ui-inputgroup-addon" style="">
+									<i class="pi pi-map"></i>
+								</div>
+								<p:inputText placeholder="Cidade" id="cidade"  style="width:10.5%;" value="#{beanUsuario.endereco.localidade}"/>
+								
+								<div class="ui-inputgroup-addon" style="">
+									<i class="pi pi-flag"></i>
+								</div>
+								<p:inputText placeholder="UF" id="uf"  style="width:6.5%;" value="#{beanUsuario.endereco.uf}"/>								
+								
+							</div>
+						</div>	
+	
+					</div>
+				
+				<!-- Botoes do Formulário -->
+				
+				<div class="p-col-12 p-md-4" style="margin-top:15px;">
+					<p:commandButton action="#{beanUsuario.salvar}" icon="pi pi-check" styleClass="ui-button-success" value="Salvar" update="@form"/>
+					<p:commandButton icon="pi pi-times" styleClass="ui-button-warning" value="Limpar" style="margin-left:10px;" type="reset" />
+					<p:linkButton outcome="pesquisaUsuario" icon="pi pi-search" styleClass="ui-button-primary" value="Pesquisar" style="margin-left:10px;" />
+				</div>
+					
+				</div>
+			</h:form>
+        </p:fieldset>
+        
+    </div>
+
+</h:body>
+</html>
